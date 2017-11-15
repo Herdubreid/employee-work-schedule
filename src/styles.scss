@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+/* Fonts and Icons */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css');
+
+/* Fonts and Icons */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css');
+
+/* Material Style */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Fullcalendar Style */
+@import '~fullcalendar/dist/fullcalendar.css';
+.fc-basic-view .fc-body .fc-row {
+    min-height: 2em !important;
+}
+.fc-toolbar {
+    margin-bottom: 2px !important;
+    margin-top: 2px !important;
+}
+.fc-header-title h2 {
+    font-size: .9em;
+    white-space: normal !important;
+}
+/* Global Styles */

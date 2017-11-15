@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>{{(employee | async)?.alph}} ({{(employee | async)?.an8}})</mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-select (selectionChange)="selectionChange($event)" placeholder="Select Schedule">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let e of team | async" [value]="e.an8">
+          {{e.alph}} ({{e.an8}})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-calendar [display]="calendar" [start]="first" header="true"></app-calendar>
+    <app-calendar [display]="calendar" [start]="second" footer="true"></app-calendar>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Roster</mat-card-title>
+  <mat-card-subtitle>{{ start | async | date: 'EEEE, MMMM d' }}</mat-card-subtitle>
+  <mat-card-content>
+    <app-roster></app-roster>
+  </mat-card-content>
+</mat-card>
