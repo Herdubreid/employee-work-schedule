@@ -1,6 +1,19 @@
-# EmployeeWorkSchedule
+# C\cEmployeeWorkSchedule
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+
+## Clone
+
+Run `git clone https://github.com/Herdubreid/employee-work-schedule.git` and `cd employee-work-schedule` or [Download](https://github.com/Herdubreid/employee-work-schedule/archive/master.zip) a ZIP bundle.
+
+## Configuration
+
+Open src/index.html and set the `AIS_BASE_URL` to your AIS server address:
+`AIS_BASE_URL` = `https://server:port/`.  
+Use server address `DEMO` for demo mode. 
+
+The `Employee Schedule` uses a custom inquiry application `P597311`.  
+Contact Author for more details.
 
 ## Development server
 
@@ -14,14 +27,8 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
 ## Further help
+
+A [Demo](https://herdubreid.github.io/employee-work-schedule/docs/).
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
