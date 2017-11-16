@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { SignonService, StatusTypes } from 'e1-service';
+import * as Moment from 'moment';
 
 import { SignonPromptComponent } from './e1/signon-prompt.component';
-import { IState } from './store/state';
+import { IState, IAppState } from './store/state';
+import { AppActions } from './store/actions';
 
 declare var AIS_BASE_URL;
 
@@ -19,6 +22,7 @@ export class AppComponent implements OnInit {
   }
   status: Observable<string>;
   constructor(
+    public http: Http,
     public store: Store<IState>,
     public dlg: MatDialog,
     public signon: SignonService
@@ -28,10 +32,22 @@ export class AppComponent implements OnInit {
     this.status
       .subscribe(status => {
         if (status.localeCompare(StatusTypes.STATUS_OFF) === 0) {
-          this.dlg.open(SignonPromptComponent, {
-            disableClose: true,
-            width: '250px'
-          });
+          if (signon.baseUrl.localeCompare('DEMO') === 0) {
+            http.get('https://herdubreid.github.io/employee-work-schedule/docs/demo.json')
+              .map(response => response.json())
+              .subscribe((app: IAppState) => {
+                app.rosters.forEach(r => {
+                  r.start = Moment(r.start);
+                  r.end = Moment(r.end);
+                });
+                store.dispatch(new AppActions.LoadDemoAction(app));
+              });
+          } else {
+            this.dlg.open(SignonPromptComponent, {
+              disableClose: true,
+              width: '250px'
+            });
+          }
         }
       });
   }

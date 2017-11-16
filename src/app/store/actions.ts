@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store';
 import * as Moment from 'moment';
 
-import { IEmployee, IRoster } from './state';
+import { IAppState, IEmployee, IRoster } from './state';
 /**
  * Application Actions
  */
 
 export enum ActionTypes {
+    LOAD_DEMO = 'LOAD_DEMO',
     TEAM = 'TEAM',
     ROSTERS = 'ROSTERS',
     ADD_ROSTERS = 'ADD_ROSTERS',
@@ -17,6 +18,10 @@ export enum ActionTypes {
 }
 
 export namespace AppActions {
+    export class LoadDemoAction implements Action {
+        readonly type = ActionTypes.LOAD_DEMO;
+        constructor(public appState: IAppState) { }
+    }
     export class TeamAction implements Action {
         readonly type = ActionTypes.TEAM;
         constructor(public team: IEmployee[]) { }
@@ -45,6 +50,7 @@ export namespace AppActions {
         readonly type = ActionTypes.RESET;
     }
     export type AllActions =
+        LoadDemoAction |
         TeamAction |
         RostersAction |
         AddRostersAction |

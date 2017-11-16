@@ -1,4 +1,4 @@
-import {IServerState, initialServerState} from 'e1-service';
+import { IServerState, initialServerState } from 'e1-service';
 import * as Moment from 'moment';
 /**
  * Application State
@@ -17,6 +17,7 @@ export interface IEmployee {
     alph: string;
 }
 export interface IAppState {
+    mode: string;
     employee: IEmployee;
     team: IEmployee[];
     rosters: IRoster[];
@@ -28,6 +29,7 @@ export interface IState {
     e1: IServerState;
 }
 export const initialAppState = {
+    mode: 'NORMAL',
     employee: null,
     team: [],
     rosters: [],

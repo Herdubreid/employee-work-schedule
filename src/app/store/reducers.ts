@@ -8,6 +8,8 @@ import { AppActions, ActionTypes } from './actions';
  */
 export function appReducer(state = initialAppState, action: AppActions.AllActions): IAppState {
     switch (action.type) {
+        case ActionTypes.LOAD_DEMO:
+            return action.appState;
         case ActionTypes.REFRESH:
             return Object.assign({}, initialAppState, {
                 employee: action.employee,
