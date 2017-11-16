@@ -18,9 +18,10 @@ declare var AIS_BASE_URL;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  mode: Observable<string>;
+  status: Observable<string>;
   ngOnInit() {
   }
-  status: Observable<string>;
   constructor(
     public http: Http,
     public store: Store<IState>,
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
     public signon: SignonService
   ) {
     signon.baseUrl = AIS_BASE_URL;
+    this.mode = store.select<string>(s => s.app.mode);
     this.status = store.select<string>(s => s.e1.status);
     this.status
       .subscribe(status => {

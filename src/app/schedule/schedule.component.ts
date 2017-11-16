@@ -32,7 +32,7 @@ export class ScheduleComponent implements OnInit {
   ) {
     this.first = new Date();
     this.first.setDate(1);
-    this.second = this.first.addMonths(3);
+    this.second = this.first.addMonths(1);
     this.start = store.select<Moment.Moment>(s => s.app.start);
     this.employee = store.select<IEmployee>(s => s.app.employee);
     this.team = store.select<IEmployee[]>(s => s.app.team);
