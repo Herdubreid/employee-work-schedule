@@ -23,6 +23,7 @@ export interface IAppState {
     rosters: IRoster[];
     selection: string;
     start: Moment.Moment;
+    end: Moment.Moment;
 }
 export interface IState {
     app: IAppState;
@@ -34,7 +35,8 @@ export const initialAppState = {
     team: [],
     rosters: [],
     selection: '',
-    start: null
+    start: null,
+    end: null
 };
 export const initialState = {
     app: initialAppState,

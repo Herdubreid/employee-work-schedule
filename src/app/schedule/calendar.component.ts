@@ -79,6 +79,7 @@ export class CalendarComponent implements OnInit {
         });
         this.display
             .subscribe(display => {
+                console.log('Update Calendar');
                 const events = display.rosters
                     .filter(r => display.selection ?
                         display.selection.localeCompare(r.an8) === 0 : true)
