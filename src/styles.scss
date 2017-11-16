@@ -11,6 +11,9 @@
 
 /* Fullcalendar Style */
 @import '~fullcalendar/dist/fullcalendar.css';
+.fc-basic-view .fc-body .fc-row {
+    min-height: 2em !important;
+}
 .fc-toolbar {
     margin-bottom: 2px !important;
     margin-top: 2px !important;

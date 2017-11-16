@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { reduce, map, filter } from 'rxjs/Operators';
+import { Observable } from 'rxjs';
+import { reduce, map, filter, combineLatest, delay } from 'rxjs/Operators';
 import * as $ from 'jquery';
 import * as Moment from 'moment';
 import 'fullcalendar';
@@ -18,10 +18,6 @@ interface IEvent extends FC.EventObject {
     type: string;
     activities: IActivity[];
 }
-export interface ICalendar {
-    selection: string;
-    rosters: IRoster[];
-}
 
 @Component({
     selector: 'app-calendar',
@@ -32,7 +28,8 @@ export class CalendarComponent implements OnInit {
     @Input('start') start: Date;
     @Input('header') header: boolean;
     @Input('footer') footer: boolean;
-    @Input('display') display: Observable<ICalendar>;
+    @Input('rosters') rosters: Observable<IRoster[]>;
+    @Input('selection') selection: Observable<string>;
     ngOnInit() {
         const header = this.header ? {
             left: 'title',
@@ -47,6 +44,7 @@ export class CalendarComponent implements OnInit {
         $(this.host.nativeElement).fullCalendar({
             header,
             footer,
+            events: [],
             defaultDate: this.start,
             nextDayThreshold: Moment.duration('10:00'),
             height: 'auto',
@@ -56,6 +54,7 @@ export class CalendarComponent implements OnInit {
             aspectRatio: 1,
             allDayDefault: true,
             selectable: true,
+            selectLongPressDelay: 200,
             select: (start, end, jsEvent, view) => {
                 this.store.dispatch(new AppActions.StartEndAction(start, end));
             },
@@ -77,12 +76,14 @@ export class CalendarComponent implements OnInit {
                 }
             }
         });
-        this.display
-            .subscribe(display => {
-                console.log('Update Calendar');
-                const events = display.rosters
-                    .filter(r => display.selection ?
-                        display.selection.localeCompare(r.an8) === 0 : true)
+        Observable
+            .combineLatest(this.rosters, this.selection)
+            .filter(([rosters]) => rosters.length > 0)
+            .delay(100)
+            .subscribe(([rosters, selection]) => {
+                const events = rosters
+                    .filter(r => selection ?
+                        selection.localeCompare(r.an8) === 0 : true)
                     .reduce<IEvent[]>((events, r) => {
                         const node = events.find(e => (r.start.diff(e.start) === 0 && r.activity.localeCompare(e.type)) === 0) ||
                             events[events.push({ start: r.start, title: 'Events', type: r.activity, activities: [] }) - 1];

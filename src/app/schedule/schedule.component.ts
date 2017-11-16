@@ -4,9 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as Moment from 'moment';
 
-import { IState, IEmployee } from '../store/state';
+import { IState, IEmployee, IRoster } from '../store/state';
 import { AppActions } from '../store/actions';
-import { ICalendar } from './calendar.component';
 import '../helpers/utils';
 
 @Component({
@@ -21,7 +20,8 @@ export class ScheduleComponent implements OnInit {
   start: Observable<Moment.Moment>;
   employee: Observable<IEmployee>;
   team: Observable<IEmployee[]>;
-  calendar: Observable<ICalendar>;
+  rosters: Observable<IRoster[]>;
+  selection: Observable<string>;
   selectionChange(e) {
     this.store.dispatch(new AppActions.SelectionAction(e.value));
   }
@@ -36,11 +36,7 @@ export class ScheduleComponent implements OnInit {
     this.start = store.select<Moment.Moment>(s => s.app.start);
     this.employee = store.select<IEmployee>(s => s.app.employee);
     this.team = store.select<IEmployee[]>(s => s.app.team);
-    this.calendar = store.select<ICalendar>(s => {
-      return {
-        selection: s.app.selection,
-        rosters: s.app.rosters
-      }
-    });
+    this.rosters = store.select<IRoster[]>(s => s.app.rosters);
+    this.selection = store.select<string>(s => s.app.selection);
   }
 }

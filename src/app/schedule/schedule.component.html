@@ -9,8 +9,8 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <app-calendar [display]="calendar" [start]="first" header="true"></app-calendar>
-    <app-calendar [display]="calendar" [start]="second" footer="true"></app-calendar>
+    <app-calendar [rosters]="rosters" [selection]="selection" [start]="first" header="true"></app-calendar>
+    <app-calendar [rosters]="rosters" [selection]="selection" [start]="second" footer="true"></app-calendar>
   </mat-card-content>
 </mat-card>
 <mat-card>
