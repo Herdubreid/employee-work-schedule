@@ -7,6 +7,9 @@ import { SignonService } from 'e1-service';
  * Signon Prompt
  */
 
+declare var DEFAULT_USER;
+declare var DEFAULT_PWD;
+
 @Component({
   selector: 'app-signon-prompt',
   template: `
@@ -55,5 +58,7 @@ export class SignonPromptComponent implements OnInit {
     public store: Store<any>,
     public signon: SignonService
   ) {
+    this.username = DEFAULT_USER;
+    this.password = DEFAULT_PWD;
   }
 }

@@ -1,4 +1,46 @@
-<div class="content" [hidden]="(status | async) === 'STATUS_OFF' && (mode | async) !== 'DEMO'">
-  <mat-progress-bar value="100" [mode]="(status | async) === 'STATUS_BUSY' ? 'indeterminate' : 'determinate'"></mat-progress-bar>
-  <app-schedule></app-schedule>
+<div *ngIf="(status | async) !== 'STATUS_OFF'">
+  <div class="heading">
+    <mat-toolbar color="primary">
+      <table>
+        <tr>
+          <td>
+          </td>
+          <td class="center">
+            Employee Schedule
+          </td>
+          <td class="right">
+            <button mat-raised-button class="menu-button" color="primary" [matMenuTriggerFor]="logout">
+              <table>
+                <tr>
+                  <td>
+                    <table>
+                      <tr>
+                        <td class="caption">{{ username | async }}</td>
+                      </tr>
+                      <tr>
+                        <td class="sub-caption">[{{ environment | async }}]</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td>
+                    <mat-icon class="right">more_vert</mat-icon>
+                  </td>
+                </tr>
+              </table>
+            </button>
+            <mat-menu #logout="matMenu" [overlapTrigger]="false">
+              <button mat-menu-item (click)="signout()" [disabled]="(status | async) !== 'STATUS_READY'">
+                <mat-icon style="color:red">clear</mat-icon>
+                Sign Out
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </table>
+    </mat-toolbar>
+    <mat-progress-bar value="100" [mode]="(status | async) === 'STATUS_BUSY' ? 'indeterminate' :'determinate'"></mat-progress-bar>
+  </div>
+  <div class="content">
+    <app-schedule></app-schedule>
+  </div>
 </div>

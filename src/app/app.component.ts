@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { SignonService, StatusTypes } from 'e1-service';
+import { SignonService, StatusTypes, E1Actions } from 'e1-service';
 import * as Moment from 'moment';
 
 import { SignonPromptComponent } from './e1/signon-prompt.component';
@@ -20,6 +20,12 @@ declare var AIS_BASE_URL;
 export class AppComponent implements OnInit {
   mode: Observable<string>;
   status: Observable<string>;
+  username: Observable<string>;
+  environment: Observable<string>;
+  signout() {
+    this.store.dispatch(new AppActions.ResetAction());
+    this.store.dispatch(new E1Actions.ResetAction('sign-out'));
+  }
   ngOnInit() {
   }
   constructor(
@@ -31,6 +37,8 @@ export class AppComponent implements OnInit {
     signon.baseUrl = AIS_BASE_URL;
     this.mode = store.select<string>(s => s.app.mode);
     this.status = store.select<string>(s => s.e1.status);
+    this.username = store.select<string>(s => s.e1.authResponse ? s.e1.authResponse.userInfo.alphaName : null);
+    this.environment = store.select<string>(s => s.e1.authResponse ? s.e1.authResponse.environment : null);
     this.status
       .subscribe(status => {
         if (status.localeCompare(StatusTypes.STATUS_OFF) === 0) {
