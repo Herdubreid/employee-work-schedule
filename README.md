@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
+[Run a Demo here](http://es.celin.io).
+
 ## Clone
 
 Run `git clone https://github.com/Herdubreid/employee-work-schedule.git` and `cd employee-work-schedule` or [Download](https://github.com/Herdubreid/employee-work-schedule/archive/master.zip) a ZIP bundle.
@@ -31,7 +33,5 @@ Run `ng generate component component-name` to generate a new component. You can 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
 ## Further help
-
-A [Demo](https://herdubreid.github.io/employee-work-schedule/docs/).
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
